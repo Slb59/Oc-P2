@@ -1,4 +1,5 @@
 from logs.logger import Logger
+from products.product import Product
 
 def test_logging():
 
@@ -9,8 +10,12 @@ def test_logging():
     logger.error('Ceci est un message de log au niveau ERROR')
     logger.critical('Ceci est un message de log au niveau CRITICAL')
 
+def load_sophies_world():
+    book = Product()
+    book.load('http://books.toscrape.com/catalogue/sophies-world_966/index.html')
+
 def main():
     pass
 
 if __name__ == '__main__':
-    test_logging()
+    load_sophies_world()
