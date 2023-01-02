@@ -1,6 +1,7 @@
 import logging
 
 class Logger:
+    """ Manage the logs of the project """
     def __init__(self):
         logging.basicConfig(level=logging.DEBUG)
         self.logger = logging.getLogger('OCP2')

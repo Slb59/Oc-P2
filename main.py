@@ -12,7 +12,7 @@ def test_logging():
 
 def load_sophies_world():
     book = Product()
-    book.load('http://books.toscrape.com/catalogue/sophies-world_966/index.html')
+    book.load()
 
 def main():
     pass
