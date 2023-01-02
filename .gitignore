@@ -1,5 +1,8 @@
-# fichier de log
+__pycache__
+env
+*~*
+.idea
 logs/logs.txt
-csv/*
-img/*
-env/*
+csv
+*.csv
+img
