@@ -3,7 +3,7 @@ import re
 from bs4 import BeautifulSoup
 
 from logs.logger import Logger
-class ProductInfo:
+class BookInfo:
     def __init__(self, upc, title, desc, cat):
         self.universal_product_code = upc
         self.title = title
@@ -13,6 +13,8 @@ class ProductInfo:
 class Product:
     """Description of a book product"""
     def __init__(self):
+
+        self.site_url = 'http://books.toscrape.com/'
         self.page_url = 'http://books.toscrape.com/catalogue/the-death-of-humanity-and-the-case-for-life_932/index.html'
         self.session = requests.Session()
         self.html = self.session.get(self.page_url).content
@@ -21,14 +23,28 @@ class Product:
         self.price_excluding_tax = 0
 
         self.number_available = 0
-
         self.review_rating = 0
+
         self.image_url = ''
 
-        self.info = ''  # a ProductInfo class
+        self.info = ''  # a BookInfo class
 
     def __str__(self):
-        return '[' + self.info.category + '] ' + self.info.title + ': ' + self.info.product_description
+        return '[' + self.info.category + '] ' + self.info.title
+
+    def __repr__(self):
+        return '\n'.join([
+            f'title: {self.info.title}',
+            f'category: {self.info.category}',
+            f'page: {self.page_url}',
+            f'description: {self.info.product_description}',
+            f'universal product code: {self.info.universal_product_code}',
+            f'price (tax): {self.price_including_tax}',
+            f'price (no tax): {self.price_excluding_tax}',
+            f'number available: {self.number_available}',
+            f'review rating: {self.review_rating}',
+            f'image url: {self.image_url}'
+        ])
 
     def load(self):
         logger = Logger()
@@ -49,7 +65,7 @@ class Product:
         title = root.find('h1').text
         category = root.find('a', href=re.compile('category/books/')).text
 
-        self.info = ProductInfo(upc, title, desc, category)
+        self.info = BookInfo(upc, title, desc, category)
 
         # find available
         get_nbavailable = root.find('p', class_='instock availability').text.strip()
@@ -66,10 +82,11 @@ class Product:
 
         # find url image
         list_rep = root.find('img')['src'].split('/')[2:]
-        print(list_rep)
-        print('/'.join(list_rep))
+        self.image_url = self.site_url + '/'.join(list_rep)
 
-        t='http://books.toscrape.com/'
+
+
+
 
 
 

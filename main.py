@@ -13,6 +13,7 @@ def test_logging():
 def load_sophies_world():
     book = Product()
     book.load()
+    print(repr(book))
 
 def main():
     pass

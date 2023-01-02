@@ -1,3 +1,5 @@
 class site:
     def __init__(self):
-        pass
+        self.url = 'http://books.toscrape.com/'
+        self.categories = []
+        self.nb_books = 0
