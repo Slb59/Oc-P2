@@ -21,5 +21,4 @@ class Category:
         info += '\n' + '\n'.join([str(c) for c in self.books])
         return info
 
-    def load(self):
-        pass
+

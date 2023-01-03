@@ -1,4 +1,3 @@
-import requests
 import re
 import textwrap
 
@@ -17,11 +16,11 @@ class BookInfo:
 
 class Book:
     """ Description of a book """
-    def __init__(self, url):
+    def __init__(self, url, session):
 
         self.site_url = 'http://books.toscrape.com/'
         self.page_url = url
-        self.session = requests.Session()
+        self.session = session
         self.html = self.session.get(self.page_url).content
 
         self.price_including_tax = 0

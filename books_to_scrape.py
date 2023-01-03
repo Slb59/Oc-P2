@@ -3,13 +3,15 @@ from book import *
 from category import *
 from app import ArgParser, BooksToScrape
 
+import requests
 
 def test_book():
     url = 'http://books.toscrape.com/catalogue/' \
         'the-death-of-humanity-and-the-case-for-life_932/' \
         'index.html'
+    session = requests.Session()
 
-    book = Book(url)
+    book = Book(url, session)
     book.load()
     print(repr(book))
     csv_book = BookExporter(book)
@@ -17,17 +19,12 @@ def test_book():
 
 
 def test_category():
-    cat = Category('Philosophy')
 
-    url = 'http://books.toscrape.com/catalogue/' \
-          'the-death-of-humanity-and-the-case-for-life_932/' \
-          'index.html'
+    session = requests.Session()
 
-    book = Book(url)
-    book.load()
+    cat_loader = CategoryLoader(session)
+    cat = cat_loader.load()
 
-    cat.add_book(book)
-    cat.add_book(book)
     print(repr(cat))
     print(cat)
     csv_cat = CategoryExporter(cat)

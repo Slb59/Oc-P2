@@ -5,7 +5,7 @@ class Logger:
     """ Manage the logs of the project """
     def __init__(self):
         logging.basicConfig(level=logging.DEBUG)
-        self.logger = logging.getLogger('OCP2')
+        self.logger = logging.getLogger('books_to_scrape')
         file_handler = logging.FileHandler("logs/logs.txt")
         formatter = logging.Formatter(
             "%(asctime)s - %(name)s - %(levelname)s "
