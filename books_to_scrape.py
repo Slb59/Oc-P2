@@ -14,9 +14,6 @@ def test_book():
     book = Book(url, session)
     book.load()
     print(repr(book))
-    csv_book = BookExporter(book)
-    csv_book.to_csv('csv/product.csv')
-
 
 def test_category():
 

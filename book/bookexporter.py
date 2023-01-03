@@ -9,13 +9,11 @@ class BookExporter:
 
     def to_csv(self, file):
 
-        LOGGER.debug('begin book_to_csv: ' + file)
+        LOGGER.debug('export ' + str(self.book))
 
-        with open(file, 'w', newline='') as f:
+        output = csv.writer(file)
 
-            writer = csv.writer(f)
-
-            writer.writerow([
+        data = [
                 self.book.page_url,
                 self.book.info.universal_product_code,
                 self.book.info.title,
@@ -26,4 +24,7 @@ class BookExporter:
                 self.book.info.category,
                 self.book.review_rating,
                 self.book.image_url
-            ])
+        ]
+
+        output.writerow([str(d).encode('utf-8') for d in data])
+
