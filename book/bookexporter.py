@@ -1,15 +1,15 @@
 import csv
-from logs import *
+from logs import LOGGER
 
 
-class ProductExporter:
+class BookExporter:
     """ Export a book in a csv file """
     def __init__(self, book):
         self.book = book
 
     def to_csv(self, file):
-        logger = Logger()
-        logger.debug('begin book_to_csv: ' + file)
+
+        LOGGER.debug('begin book_to_csv: ' + file)
 
         with open(file, 'w', newline='') as f:
 

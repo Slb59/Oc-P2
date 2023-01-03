@@ -4,7 +4,7 @@ import textwrap
 
 from bs4 import BeautifulSoup
 
-from logs.logger import Logger
+from logs import LOGGER
 
 
 class BookInfo:
@@ -15,14 +15,12 @@ class BookInfo:
         self.category = cat
 
 
-class Product:
-    """Description of a book product"""
-    def __init__(self):
+class Book:
+    """ Description of a book """
+    def __init__(self, url):
 
         self.site_url = 'http://books.toscrape.com/'
-        self.page_url = 'http://books.toscrape.com/catalogue/' \
-                        'the-death-of-humanity-and-the-case-for-life_932/' \
-                        'index.html'
+        self.page_url = url
         self.session = requests.Session()
         self.html = self.session.get(self.page_url).content
 
@@ -55,8 +53,8 @@ class Product:
         ])
 
     def load(self):
-        logger = Logger()
-        logger.debug('begin load: ' + self.page_url)
+
+        LOGGER.debug('begin load: ' + self.page_url)
 
         root = BeautifulSoup(self.html, 'html.parser')
 

@@ -1,9 +1,9 @@
 import app
 import argparse
-
+from logs import LOGGER
 
 class ArgParser:
-    def __init__(self, log):
+    def __init__(self):
         self.parser = argparse.ArgumentParser('books_to_scrape')
 
         self.parser.add_argument('--version', '-v',
@@ -20,7 +20,7 @@ class ArgParser:
 
         self.args = self.parser.parse_args()
 
-        log.debug(self.args)
+        LOGGER.debug(self.args)
 
         if self.args.version:
             print('books_to_scrape ' + app.__version__)
