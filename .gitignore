@@ -3,6 +3,7 @@ env
 *~*
 .idea
 logs/logs.txt
+*.log
 csv
 *.csv
 img

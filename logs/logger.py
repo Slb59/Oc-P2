@@ -1,12 +1,15 @@
 import logging
 
+
 class Logger:
     """ Manage the logs of the project """
     def __init__(self):
         logging.basicConfig(level=logging.DEBUG)
         self.logger = logging.getLogger('OCP2')
         file_handler = logging.FileHandler("logs/logs.txt")
-        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s", "%d/%m/%Y %H:%M:%S")
+        formatter = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s "
+            "- %(message)s", "%d/%m/%Y %H:%M:%S")
         file_handler.setFormatter(formatter)
         self.logger.addHandler(file_handler)
 

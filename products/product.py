@@ -1,8 +1,12 @@
 import requests
 import re
+import textwrap
+
 from bs4 import BeautifulSoup
 
 from logs.logger import Logger
+
+
 class BookInfo:
     def __init__(self, upc, title, desc, cat):
         self.universal_product_code = upc
@@ -10,12 +14,15 @@ class BookInfo:
         self.product_description = desc
         self.category = cat
 
+
 class Product:
     """Description of a book product"""
     def __init__(self):
 
         self.site_url = 'http://books.toscrape.com/'
-        self.page_url = 'http://books.toscrape.com/catalogue/the-death-of-humanity-and-the-case-for-life_932/index.html'
+        self.page_url = 'http://books.toscrape.com/catalogue/' \
+                        'the-death-of-humanity-and-the-case-for-life_932/' \
+                        'index.html'
         self.session = requests.Session()
         self.html = self.session.get(self.page_url).content
 
@@ -37,7 +44,8 @@ class Product:
             f'title: {self.info.title}',
             f'category: {self.info.category}',
             f'page: {self.page_url}',
-            f'description: {self.info.product_description}',
+            f'description: '
+            f'{textwrap.fill(self.info.product_description, width=150)}',
             f'universal product code: {self.info.universal_product_code}',
             f'price (tax): {self.price_including_tax}',
             f'price (no tax): {self.price_excluding_tax}',
@@ -68,7 +76,9 @@ class Product:
         self.info = BookInfo(upc, title, desc, category)
 
         # find available
-        get_nbavailable = root.find('p', class_='instock availability').text.strip()
+        get_nbavailable = root.find(
+            'p',
+            class_='instock availability').text.strip()
         pos_start = len('In stock (')
         pos_end = len(' available)')
         self.number_available = int(get_nbavailable[pos_start:-pos_end])
@@ -83,19 +93,3 @@ class Product:
         # find url image
         list_rep = root.find('img')['src'].split('/')[2:]
         self.image_url = self.site_url + '/'.join(list_rep)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
