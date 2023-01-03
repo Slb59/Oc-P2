@@ -31,7 +31,7 @@ cd Oc-P2
 pip install -r requirements.txt
 
 # executer le programme
-python book_to_scrape.py
+python books_to_scrape.py
 ```
 ---
 
@@ -41,7 +41,7 @@ Le programme peut s'executer sans paramètre
 ??? ou ajouter les directories de sortie ???
 
 ```shell
-python book_to_scrape.py
+python books_to_scrape.py
 ```
 ---
 
