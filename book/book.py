@@ -53,7 +53,7 @@ class Book:
 
     def load(self):
 
-        LOGGER.debug('begin load: ' + self.page_url)
+        LOGGER.debug('book load: ' + self.page_url)
 
         root = BeautifulSoup(self.html, 'html.parser')
 

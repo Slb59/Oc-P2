@@ -21,8 +21,9 @@ def test_book():
 def test_category():
 
     session = requests.Session()
+    url = 'http://books.toscrape.com/catalogue/category/books/philosophy_7/index.html'
 
-    cat_loader = CategoryLoader(session)
+    cat_loader = CategoryLoader(session, url)
     cat = cat_loader.load()
 
     print(repr(cat))
