@@ -37,11 +37,15 @@ python books_to_scrape.py
 
 ## Utilisation
 
-Le programme peut s'executer sans paramètre
-??? ou ajouter les directories de sortie ???
-
+Vous pouver lancer le programme sans paramètre. Les fichiers csv et images générés seront alors stockés respectivement
+dans les répertoires csv et img
 ```shell
 python books_to_scrape.py
+```
+
+Il est possible de préciser les répertoires de destination
+```shell
+python books_to_scrape.py --csv-dir mon_rep_csv --img-dir mon_rep_csv
 ```
 ---
 

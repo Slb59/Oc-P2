@@ -11,7 +11,7 @@ class BookExporter:
 
         LOGGER.debug('export ' + str(self.book))
 
-        output = csv.writer(file)
+        output = csv.writer(file, delimiter=',')
 
         data = [
                 self.book.page_url,
@@ -26,5 +26,5 @@ class BookExporter:
                 self.book.image_url
         ]
 
-        output.writerow([str(d).encode('utf-8') for d in data])
+        output.writerow([str(d).encode('utf-8').decode('utf-8') for d in data])
 

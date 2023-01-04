@@ -1,9 +1,18 @@
+# no environnement, ide files
 __pycache__
 env
+
+# no save files
 *~*
 .idea
+
+# no logs file
 logs/logs.txt
 *.log
+
+# no csv files
 csv
 *.csv
+
+# no image files
 img

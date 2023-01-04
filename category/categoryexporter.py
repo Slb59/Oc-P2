@@ -2,6 +2,7 @@ import csv
 from logs import LOGGER
 from book import *
 
+
 class CategoryExporter:
     """ Export the collection of books of a category to a csv file """
     def __init__(self, category):
@@ -12,7 +13,7 @@ class CategoryExporter:
 
         with open(file, 'w', newline='', encoding='utf-8') as f:
 
-            output = csv.writer(f)
+            output = csv.writer(f, delimiter=',')
 
             output.writerow([
                 'product_page_url',
