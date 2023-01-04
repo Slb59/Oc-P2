@@ -18,15 +18,18 @@ def test_book():
 def test_category():
 
     session = requests.Session()
-    url = 'http://books.toscrape.com/catalogue/category/books/philosophy_7/index.html'
+    url = 'http://books.toscrape.com/catalogue/category/books/mystery_3'
 
     cat_loader = CategoryLoader(session, url)
     cat = cat_loader.load()
 
     print(repr(cat))
     print(cat)
-    csv_cat = CategoryExporter(cat)
-    csv_cat.to_csv('csv/' + cat.name + '.csv')
+
+    if cat is not None:
+        csv_cat = CategoryExporter(cat)
+        csv_cat.to_csv('csv/' + cat.name + '.csv')
+
 
 
 def main():
