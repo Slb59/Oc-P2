@@ -1,6 +1,7 @@
 import app
 import requests
 import os
+
 from bs4 import BeautifulSoup
 from logs import LOGGER
 
@@ -29,13 +30,15 @@ class BooksToScrape:
                f'and a total of {str(nb_books)} books'
 
     def check_directories(self):
+        """ create the directories csv and img if not exists """
         if not os.path.exists(self.csv_directory):
-            print('not exists')
-        else:
-            print('ok')
+            os.makedirs(self.csv_directory)
+        if not os.path.exists(self.img_directory):
+            os.makedirs(self.img_directory)
 
     def to_csv(self):
         pass
+
     def get_categories_url(self):
 
         """ get all the category url in the welcome page """
@@ -58,14 +61,21 @@ class BooksToScrape:
         # minus the first one : it's a link throw all the books
         return categories_url[1:]
 
-
     def scrapping(self):
+
+        """ the main scrapping program """
+
+        LOGGER.info("Début de chargement des données Books To Scrape")
 
         for url in self.get_categories_url():
             cat_loader = CategoryLoader(self.session, url)
             cat = cat_loader.load()
             self.categories.append(cat)
 
+        LOGGER.info("Exportation des données Books To Scrape")
+
         self.to_csv()
+
+        LOGGER.info("Chargement des images Books To Scrape")
 
         LOGGER.info("Fin de chargement des données Books To Scrape")
