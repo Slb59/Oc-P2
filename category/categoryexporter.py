@@ -1,6 +1,6 @@
 import csv
 from logs import LOGGER
-from book import *
+from book import BookExporter
 
 
 class CategoryExporter:

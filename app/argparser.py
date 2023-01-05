@@ -1,6 +1,8 @@
 import app
 import argparse
 from logs import LOGGER
+from .parameters import Parameters
+
 
 class ArgParser:
     def __init__(self):
@@ -27,7 +29,7 @@ class ArgParser:
 
     def read_parameters(self):
 
-        p = app.config.Parameters()
+        p = Parameters()
 
         if self.args.csv_dir is not None:
             p.csv_directory = self.args.csv_dir

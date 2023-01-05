@@ -1,5 +1,5 @@
 from category import Category
-from book import Book
+from book import BookLoader
 from logs import LOGGER
 from bs4 import BeautifulSoup
 
@@ -21,9 +21,9 @@ class CategoryLoader:
         name = self.root.find('h1').text
 
         cat = Category(name)
-        cat.url = self.page_url
+        cat.category_page1_url = self.page_url
 
-        return self.load_pages(cat)
+        return self.load_all_pages(cat)
 
     def get_page_count(self):
         """ give the number of pages of the category """
@@ -33,7 +33,7 @@ class CategoryLoader:
             nb = int(li.text.strip().split(' ')[3])
         return nb
 
-    def load_pages(self, cat):
+    def load_all_pages(self, cat):
         """ call load_books for each page """
         LOGGER.debug('Category loader for ' + str(self.page_count) + ' pages')
         for p in range(1, self.page_count + 1):
@@ -41,10 +41,10 @@ class CategoryLoader:
                 self.page_url_index = '/index.html'
             else:
                 self.page_url_index = f'/page-{p}.html'
-            self.load_books(p, cat)
+            self.load_all_books(p, cat)
         return cat
 
-    def load_books(self, page, cat):
+    def load_all_books(self, page, cat):
         """ call the book loader for each book of the page """
         self.html = self.session.get(self.page_url + self.page_url_index).content
         LOGGER.debug('Category load page ' + str(page) + ': ' + self.page_url + self.page_url_index)
@@ -57,9 +57,9 @@ class CategoryLoader:
             book_url = li.find('a')['href'].split('/')[3:]
             book_url = self.main_url + '/'.join(book_url)
 
-            book = Book(book_url, self.session)
-            book.load()
+            book_loader = BookLoader(book_url, self.session)
+            a_book = book_loader.load()
 
-            cat.add_book(book)
+            cat.add_book(a_book)
 
         return cat

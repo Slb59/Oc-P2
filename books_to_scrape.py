@@ -1,19 +1,7 @@
-
-from book import *
 from category import *
-from app import ArgParser, BooksToScrape
+from app import *
 
 import requests
-
-def test_book():
-    url = 'http://books.toscrape.com/catalogue/' \
-        'the-death-of-humanity-and-the-case-for-life_932/' \
-        'index.html'
-    session = requests.Session()
-
-    book = Book(url, session)
-    book.load()
-    print(repr(book))
 
 def test_category():
 
@@ -28,16 +16,16 @@ def test_category():
 
     if cat is not None:
         csv_cat = CategoryExporter(cat)
-        csv_cat.to_csv('csv/' + cat.name + '.csv')
-
+        csv_cat.to_csv('csv/' + cat.category_name + '.csv')
 
 
 def main():
     args = ArgParser()
-    parameters = args.read_parameters()
-    app = BooksToScrape(parameters)
-    app.exec()
+    the_parameters = args.read_parameters()
+    my_app = BooksToScrape(the_parameters)
+    # my_app.scrapping()
+    print(my_app)
 
 
 if __name__ == '__main__':
-    test_category()
+    main()

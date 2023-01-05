@@ -3,4 +3,4 @@ __author__ = "Sylvie Bricout"
 
 from .app import BooksToScrape
 from .argparser import ArgParser
-from .config import Parameters
+from .parameters import Parameters

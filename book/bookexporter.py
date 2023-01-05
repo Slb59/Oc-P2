@@ -15,13 +15,13 @@ class BookExporter:
 
         data = [
                 self.book.page_url,
-                self.book.info.universal_product_code,
-                self.book.info.title,
+                self.book.universal_product_code,
+                self.book.title,
                 self.book.price_including_tax,
                 self.book.price_excluding_tax,
                 self.book.number_available,
-                self.book.info.product_description,
-                self.book.info.category,
+                self.book.product_description,
+                self.book.category,
                 self.book.review_rating,
                 self.book.image_url
         ]
