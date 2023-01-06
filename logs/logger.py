@@ -18,7 +18,7 @@ class Logger:
         formatter = logging.Formatter(
             "%(asctime)s - %(name)s - %(levelname)s "
             "- %(message)s", "%d/%m/%Y %H:%M:%S")
-        file_handler = logging.FileHandler("logs/books_to_scrape.log", encoding='utf-8')
+        file_handler = logging.FileHandler("logs/scrape.log", encoding='utf-8')
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
         self.logger.addHandler(file_handler)

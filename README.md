@@ -1,8 +1,7 @@
-# Oc-P2 : Analyse de marché pour Books Online
+# Oc-P2 : Analyse de marché pour Books Online ![logo](logo/Logo.png)
 
 ---
 
-![logo](logo/Logo.png)
 
 ## Objectif
 Ce programme est un exercice proposé par [OpenClassRooms](https://openclassrooms.com/fr/) dans le cadre de la formation :
@@ -31,7 +30,7 @@ cd Oc-P2
 pip install -r requirements.txt
 
 # executer le programme
-python books_to_scrape.py
+python scrape.py
 ```
 ---
 
@@ -40,12 +39,12 @@ python books_to_scrape.py
 Vous pouver lancer le programme sans paramètre. Les fichiers csv et images générés seront alors stockés respectivement
 dans les répertoires csv et img
 ```shell
-python books_to_scrape.py
+python scrape.py
 ```
 
 Il est possible de préciser les répertoires de destination
 ```shell
-python books_to_scrape.py --csv-dir mon_rep_csv --img-dir mon_rep_csv
+python scrape.py --csv-dir mon_rep_csv --img-dir mon_rep_csv
 ```
 ---
 

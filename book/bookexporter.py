@@ -12,7 +12,7 @@ class BookExporter:
 
         LOGGER.debug('export ' + str(self.book))
 
-        output = csv.writer(file, delimiter=',')
+        output = csv.writer(file, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
 
         data = [
                 self.book.page_url,
