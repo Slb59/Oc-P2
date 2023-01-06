@@ -15,9 +15,9 @@ Les informations sont extraites dans des fichiers CSV (un fichier par catégorie
 les images (couverture des livres) sont stockées dans le répertoire ''_img_''. </br>
 Le nom des répertoires de destination peut être modifié via la ligne de commande 
 (voir [utilisation](#Utilisation) ci-dessous). </br>
-Les images sont classées dans les sous répertoires correspondants à la catégory des livres.
+Les images sont classées dans les sous répertoires correspondants à la catégorie des livres.
 Les fichiers image respectent la convention de nommage suivante : <title>.png </br>
-<title> correspond aux 20 premiers caractères du titre.
+<title> correspond aux 40 premiers caractères du titre du livre.
 
 ---
 

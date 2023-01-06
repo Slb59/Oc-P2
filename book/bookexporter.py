@@ -33,7 +33,7 @@ class BookExporter:
     def export_img(self, directory):
 
         LOGGER.debug(' Load image: ' + self.book.image_url)
-        r = requests.get(self.book.image_url).content
+        # r = requests.get(self.book.image_url).content
 
         # create category directory if not exists
         category_dir = directory + '/' + self.book.category.replace(' ', '_')
@@ -43,6 +43,7 @@ class BookExporter:
 
         file_name = category_dir + '/test.png'
 
-        with open(file_name, "wb+") as f:
-            f.write(r)
+        # save the file
+        # with open(file_name, "wb+") as f:
+        #     f.write(r)
 

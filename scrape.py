@@ -35,13 +35,14 @@ def test_book():
 
     book_exporter.export_img('img')
 
+
+
 def main():
     args = ArgParser()
     the_parameters = args.read_parameters()
     my_app = BooksToScrape(the_parameters)
-    test_book()
-    # my_app.scrapping()
-    # print(my_app)
+    my_app.scrapping()
+    print(my_app)
 
 if __name__ == '__main__':
     main()

@@ -38,8 +38,8 @@ class BooksToScrape:
 
     def to_csv(self):
         for cat in self.categories:
-            csv_cat = CategoryExporter(cat)
-            csv_cat.to_csv(self.csv_directory + '/' + cat.category_name + '.csv')
+            cat_exporter = CategoryExporter(cat)
+            cat_exporter.to_csv(self.csv_directory + '/' + cat.category_name + '.csv')
 
     def get_categories_url(self):
 
@@ -64,7 +64,10 @@ class BooksToScrape:
         return categories_url[1:]
 
     def export_img(self):
-        pass
+        for cat in self.categories:
+            for book in cat.books:
+                book_exporter = BookExporter(book)
+                book_exporter.export_img()
 
     def scrapping(self):
 
