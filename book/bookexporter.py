@@ -1,4 +1,5 @@
 import csv
+import requests
 from logs import LOGGER
 
 
@@ -27,4 +28,10 @@ class BookExporter:
         ]
 
         output.writerow([str(d).encode('utf-8').decode('utf-8') for d in data])
+
+    def export_img(self, file_name):
+        LOGGER.debug(' Load image: ' + self.book.image_url)
+        r = requests.get(self.book.image_url).content
+        with open(file_name, "wb+") as f:
+            f.write(r)
 

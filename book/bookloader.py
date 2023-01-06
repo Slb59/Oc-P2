@@ -26,6 +26,7 @@ class BookLoader:
         category = root.find('a', href=re.compile('category/books/')).text
 
         a_book = Book(category, title)
+        a_book.page_url = self.page_url
 
         # find description
         desc = root.find('div', id=re.compile('product_description'))

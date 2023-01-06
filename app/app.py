@@ -37,7 +37,9 @@ class BooksToScrape:
             os.makedirs(self.img_directory)
 
     def to_csv(self):
-        pass
+        for cat in self.categories:
+            csv_cat = CategoryExporter(cat)
+            csv_cat.to_csv(self.csv_directory + '/' + cat.category_name + '.csv')
 
     def get_categories_url(self):
 
@@ -61,6 +63,9 @@ class BooksToScrape:
         # minus the first one : it's a link throw all the books
         return categories_url[1:]
 
+    def export_img(self):
+        pass
+
     def scrapping(self):
 
         """ the main scrapping program """
@@ -77,5 +82,7 @@ class BooksToScrape:
         self.to_csv()
 
         LOGGER.info("Chargement des images Books To Scrape")
+
+        self.export_img()
 
         LOGGER.info("Fin de chargement des données Books To Scrape")

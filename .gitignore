@@ -7,7 +7,6 @@ env
 .idea
 
 # no logs file
-logs/logs.txt
 *.log
 
 # no csv files
