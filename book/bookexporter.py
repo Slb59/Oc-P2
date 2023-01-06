@@ -1,5 +1,6 @@
 import csv
 import requests
+import os
 from logs import LOGGER
 
 
@@ -29,9 +30,19 @@ class BookExporter:
 
         output.writerow([str(d).encode('utf-8').decode('utf-8') for d in data])
 
-    def export_img(self, file_name):
+    def export_img(self, directory):
+
         LOGGER.debug(' Load image: ' + self.book.image_url)
         r = requests.get(self.book.image_url).content
+
+        # create category directory if not exists
+        category_dir = directory + '/' + self.book.category.replace(' ', '_')
+
+        if not os.path.exists(category_dir):
+            os.makedirs(category_dir)
+
+        file_name = category_dir + '/test.png'
+
         with open(file_name, "wb+") as f:
             f.write(r)
 

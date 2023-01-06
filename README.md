@@ -1,7 +1,7 @@
-| # Oc-P2 : Analyse de marché pour Books Online | ![logo](logo/Logo.png) |
+# Oc-P2 : Analyse de marché pour Books Online 
 
 ---
-
+![logo](logo/Logo.png)
 
 ## Objectif
 Ce programme est un exercice proposé par [OpenClassRooms](https://openclassrooms.com/fr/) dans le cadre de la formation :
@@ -12,7 +12,12 @@ pour en extraire les données sur les livres
 
 ## Fonctionnement
 Les informations sont extraites dans des fichiers CSV (un fichier par catégorie) dans le répertoire ''_csv_'',
-les images (couverture des livres) sont stockées dans le répertoire ''_img_''
+les images (couverture des livres) sont stockées dans le répertoire ''_img_''. </br>
+Le nom des répertoires de destination peut être modifié via la ligne de commande 
+(voir [utilisation](#Utilisation) ci-dessous). </br>
+Les images sont classées dans les sous répertoires correspondants à la catégory des livres.
+Les fichiers image respectent la convention de nommage suivante : <title>.png </br>
+<title> correspond aux 20 premiers caractères du titre.
 
 ---
 

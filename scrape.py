@@ -31,14 +31,9 @@ def test_book():
     with open(file_name, 'w', newline='', encoding='utf-8') as f:
         book_exporter.to_csv(f)
 
-
-    img_url = 'http://books.toscrape.com/media/cache/2b/44/2b4404e00c242bf1b8263bdd99c07354.jpg'
-    a_book = Book('Test', 'Test')
-    a_book.image_url = img_url
     print(a_book)
-    book_exporter = BookExporter(a_book)
-    file_name = 'img/test.png'
-    book_exporter.export_img(file_name)
+
+    book_exporter.export_img('img')
 
 def main():
     args = ArgParser()
