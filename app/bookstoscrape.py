@@ -1,13 +1,10 @@
 import app
 import requests
 import os
-from time import time, strftime
-
+from datetime import datetime
+from time import strftime
 from bs4 import BeautifulSoup
 from logs import LOGGER
-
-
-
 from category import *
 
 
@@ -66,14 +63,13 @@ class BooksToScrape:
         # minus the first one : it's a link throw all the books
         return categories_url[1:]
 
-    def export_pictures(self):
+    def search_double_title(self):
         books_title_modify = []
         for cat in self.categories:
             for book in cat.books:
                 books_title_modify.append(book.title[:40])
         print(books_title_modify)
-                # book_exporter = BookExporter(book)
-                # book_exporter.export_pictures()
+
         with open("logs/books_title.txt", "w") as f:
             f.write("\n".join(books_title_modify))
         doubles = set()
@@ -86,29 +82,35 @@ class BooksToScrape:
                 if book.title[:40] == 'The Star-Touched Queen':
                     print(book)
 
+    def export_pictures(self):
+        """ Export the pictures of all the category in the img_directory folder """
+        for cat in self.categories:
+            cat.export_pictures(self.img_directory)
+
     def scrapping(self):
 
         """ the main scrapping program """
 
         LOGGER.info("Début de chargement des données Books To Scrape")
-        start_time = time.time()
+        start_time = datetime.now()
 
         for url in self.get_categories_url():
             cat_loader = CategoryLoader(self.session, url)
             cat = cat_loader.load()
             self.categories.append(cat)
 
-        execution_time = strftime("%M:%S", time.time() - start_time)
-        print(f"--- {execution_time}  ---")
+        execution_time = (datetime.now() - start_time).strftime("%M:%S")
+        LOGGER.info(f"--- {execution_time}  ---")
 
         LOGGER.info("Exportation des données Books To Scrape")
 
-        # self.to_csv()
+        self.to_csv()
 
         LOGGER.info("Chargement des images Books To Scrape")
-        start_time = time.time()
+        start_time = datetime.now()
 
         self.export_pictures()
-        print("--- %s seconds ---" % (time.time() - start_time))
+        execution_time = strftime("%M:%S", datetime.now() - start_time)
+        LOGGER.info(f"--- {execution_time}  ---")
 
         LOGGER.info("Fin de chargement des données Books To Scrape")

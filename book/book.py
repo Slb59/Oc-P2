@@ -13,7 +13,10 @@ class Book:
         self.number_available = 0
         self.review_rating = 0
         self.image_url = ''
+
+        # attribut used for png creation
         self.version = 'V1'
+        self.title_modify = self.title[:40]
 
     def __str__(self):
         return '[' + self.category + '] ' + self.title
@@ -34,8 +37,8 @@ class Book:
         ])
 
     def __eq__(self, other):
-        if (isinstance(other, Book)):
-            return self.title == other.title
+        if isinstance(other, Book):
+            return self.title_modify == other.title_modify
         else:
             return False
 
