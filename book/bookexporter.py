@@ -30,7 +30,7 @@ class BookExporter:
 
         output.writerow([str(d).encode('utf-8').decode('utf-8') for d in data])
 
-    def export_img(self, directory):
+    def export_pictures(self, directory):
 
         LOGGER.debug(' Load image: ' + self.book.image_url)
         # r = requests.get(self.book.image_url).content

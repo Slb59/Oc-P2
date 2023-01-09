@@ -1,9 +1,12 @@
 import app
 import requests
 import os
+from time import time, strftime
 
 from bs4 import BeautifulSoup
 from logs import LOGGER
+
+
 
 from category import *
 
@@ -63,29 +66,49 @@ class BooksToScrape:
         # minus the first one : it's a link throw all the books
         return categories_url[1:]
 
-    def export_img(self):
+    def export_pictures(self):
+        books_title_modify = []
         for cat in self.categories:
             for book in cat.books:
-                book_exporter = BookExporter(book)
-                book_exporter.export_img()
+                books_title_modify.append(book.title[:40])
+        print(books_title_modify)
+                # book_exporter = BookExporter(book)
+                # book_exporter.export_pictures()
+        with open("logs/books_title.txt", "w") as f:
+            f.write("\n".join(books_title_modify))
+        doubles = set()
+        for book_title in books_title_modify:
+            if books_title_modify.count(book_title) > 1:
+                doubles.add(book_title)
+        print(doubles)
+        for cat in self.categories:
+            for book in cat.books:
+                if book.title[:40] == 'The Star-Touched Queen':
+                    print(book)
 
     def scrapping(self):
 
         """ the main scrapping program """
 
         LOGGER.info("Début de chargement des données Books To Scrape")
+        start_time = time.time()
 
         for url in self.get_categories_url():
             cat_loader = CategoryLoader(self.session, url)
             cat = cat_loader.load()
             self.categories.append(cat)
 
+        execution_time = strftime("%M:%S", time.time() - start_time)
+        print(f"--- {execution_time}  ---")
+
         LOGGER.info("Exportation des données Books To Scrape")
 
-        self.to_csv()
+        # self.to_csv()
 
         LOGGER.info("Chargement des images Books To Scrape")
+        start_time = time.time()
 
-        self.export_img()
+        self.export_pictures()
+        print("--- %s seconds ---" % (time.time() - start_time))
 
         LOGGER.info("Fin de chargement des données Books To Scrape")

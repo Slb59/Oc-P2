@@ -13,13 +13,14 @@ class Book:
         self.number_available = 0
         self.review_rating = 0
         self.image_url = ''
+        self.version = 'V1'
 
     def __str__(self):
         return '[' + self.category + '] ' + self.title
 
     def __repr__(self):
         return '\n'.join([
-            f'title: {self.title}',
+            f'title: {self.title} - {self.version}',
             f'category: {self.category}',
             f'page: {self.page_url}',
             f'description: '
@@ -31,3 +32,12 @@ class Book:
             f'review rating: {self.review_rating}',
             f'image url: {self.image_url}'
         ])
+
+    def __eq__(self, other):
+        if (isinstance(other, Book)):
+            return self.title == other.title
+        else:
+            return False
+
+    def add_version(self):
+        self.version = 'V' + str(int(self.version[1])+1)

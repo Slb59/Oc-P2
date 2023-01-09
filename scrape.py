@@ -25,6 +25,7 @@ def test_book():
     url = 'http://books.toscrape.com/catalogue/the-bridge-to-consciousness-im-writing-the-bridge-between-science-and-our-old-and-new-beliefs_840/index.html'
     book_loader = BookLoader(url, session)
     a_book = book_loader.load()
+    a_book.add_version()
     print(repr(a_book))
     book_exporter = BookExporter(a_book)
     file_name = 'csv/a_book.csv'
@@ -33,7 +34,7 @@ def test_book():
 
     print(a_book)
 
-    book_exporter.export_img('img')
+    # book_exporter.export_img('img')
 
 
 
@@ -45,4 +46,4 @@ def main():
     print(my_app)
 
 if __name__ == '__main__':
-    main()
+    test_book()

@@ -31,6 +31,3 @@ class CategoryExporter:
             for a_book in self.category.books:
                 book_to_csv = BookExporter(a_book)
                 book_to_csv.to_csv(f)
-
-    def export_img(self):
-        pass
