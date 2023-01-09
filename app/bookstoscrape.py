@@ -66,7 +66,7 @@ class BooksToScrape:
     def get_book_counts(self):
         html = self.session.get(self.url).content
         root = BeautifulSoup(html, 'html.parser')
-        div = root.find()
+        return int(root.find('strong').text)
 
     def search_double_title(self):
         books_title_modify = []
@@ -102,11 +102,13 @@ class BooksToScrape:
         LOGGER.info("Début de chargement des données Books To Scrape")
         start_time = datetime.now()
 
+        progress_bar = tqdm(total=self.get_book_counts(), desc='Load data')
         for url in self.get_categories_url():
             cat_loader = CategoryLoader(self.session, url)
             cat = cat_loader.load()
             self.categories.append(cat)
             self.books_count += len(cat.books)
+            progress_bar.update(len(cat.books))
 
         execution_time = str(datetime.now() - start_time).split('.', 2)[0]
         LOGGER.info(f"--- {execution_time}  ---")

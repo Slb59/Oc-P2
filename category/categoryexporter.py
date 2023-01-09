@@ -1,5 +1,6 @@
 import csv
 import os
+import string
 from logs import LOGGER
 from book import BookExporter
 
@@ -48,7 +49,8 @@ class CategoryExporter:
                         + '_' + book.version \
                         + '.png'
 
-            book.image_file = file_name
+            book.image_file = file_name.translate(str.maketrans('', '', string.punctuation))
+            print(book.image_file)
             book_exporter = BookExporter(book)
             book_exporter.export_pictures()
 
