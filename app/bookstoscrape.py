@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 from logs import LOGGER
 from category import *
 
+from tqdm import tqdm
+
 
 class BooksToScrape:
     """ manage the extractor of books.toscrape.com website """
@@ -19,15 +21,13 @@ class BooksToScrape:
         self.session = requests.Session()
         self.url = 'http://books.toscrape.com/'
         self.categories = []
+        self.books_count = 0
 
         LOGGER.debug('Initialisation de BooksToScrape')
 
     def __str__(self):
-        nb_books = 0
-        for c in self.categories:
-            nb_books += len(c.books)
         return f'Books To Scrape: {len(self.categories)} categories ' \
-               f'and a total of {str(nb_books)} books'
+               f'and a total of {str(self.books_count)} books'
 
     def check_directories(self):
         """ create the directories csv and img if not exists """
@@ -63,6 +63,11 @@ class BooksToScrape:
         # minus the first one : it's a link throw all the books
         return categories_url[1:]
 
+    def get_book_counts(self):
+        html = self.session.get(self.url).content
+        root = BeautifulSoup(html, 'html.parser')
+        div = root.find()
+
     def search_double_title(self):
         books_title_modify = []
         for cat in self.categories:
@@ -84,8 +89,11 @@ class BooksToScrape:
 
     def export_pictures(self):
         """ Export the pictures of all the category in the img_directory folder """
+        progress_bar = tqdm(total=len(self.categories), desc='Load images')
         for cat in self.categories:
-            cat.export_pictures(self.img_directory)
+            cat_exporter = CategoryExporter(cat)
+            cat_exporter.export_pictures(self.img_directory)
+            progress_bar.update(1)
 
     def scrapping(self):
 
@@ -98,19 +106,21 @@ class BooksToScrape:
             cat_loader = CategoryLoader(self.session, url)
             cat = cat_loader.load()
             self.categories.append(cat)
+            self.books_count += len(cat.books)
 
-        execution_time = (datetime.now() - start_time).strftime("%M:%S")
+        execution_time = str(datetime.now() - start_time).split('.', 2)[0]
         LOGGER.info(f"--- {execution_time}  ---")
 
         LOGGER.info("Exportation des données Books To Scrape")
-
+        start_time = datetime.now()
         self.to_csv()
+        execution_time = str(datetime.now() - start_time).split('.', 2)[0]
+        LOGGER.info(f"--- {execution_time}  ---")
 
         LOGGER.info("Chargement des images Books To Scrape")
         start_time = datetime.now()
-
         self.export_pictures()
-        execution_time = strftime("%M:%S", datetime.now() - start_time)
+        execution_time = str(datetime.now() - start_time).split('.', 2)[0]
         LOGGER.info(f"--- {execution_time}  ---")
 
         LOGGER.info("Fin de chargement des données Books To Scrape")

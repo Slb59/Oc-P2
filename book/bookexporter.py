@@ -15,6 +15,11 @@ class BookExporter:
 
         output = csv.writer(file, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
 
+        if self.book.image_file:
+            image_file = self.book.image_file
+        else:
+            image_file = self.book.image_url
+
         data = [
                 self.book.page_url,
                 self.book.universal_product_code,
@@ -25,25 +30,17 @@ class BookExporter:
                 self.book.product_description,
                 self.book.category,
                 self.book.review_rating,
-                self.book.image_url
+                image_file
         ]
 
         output.writerow([str(d).encode('utf-8').decode('utf-8') for d in data])
 
-    def export_pictures(self, directory):
+    def export_pictures(self):
 
         LOGGER.debug(' Load image: ' + self.book.image_url)
-        # r = requests.get(self.book.image_url).content
-
-        # create category directory if not exists
-        category_dir = directory + '/' + self.book.category.replace(' ', '_')
-
-        if not os.path.exists(category_dir):
-            os.makedirs(category_dir)
-
-        file_name = category_dir + '/test.png'
+        r = requests.get(self.book.image_url).content
 
         # save the file
-        # with open(file_name, "wb+") as f:
-        #     f.write(r)
+        with open(self.book.image_file, "wb+") as f:
+            f.write(r)
 

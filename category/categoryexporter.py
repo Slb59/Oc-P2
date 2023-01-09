@@ -48,7 +48,9 @@ class CategoryExporter:
                         + '_' + book.version \
                         + '.png'
 
-            book.image_url = file_name
+            book.image_file = file_name
+            book_exporter = BookExporter(book)
+            book_exporter.export_pictures()
 
         # export new csv
-        self.to_csv(category_path + '/' + self.category.category_name.category_name + '.csv')
+        self.to_csv(category_path + '/' + self.category.category_name + '.csv')

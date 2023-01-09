@@ -8,7 +8,8 @@ class Category:
 
     def add_book(self, book):
         # if the book exists change the version of the book before add
-        # TODO
+        if book in self.books:
+            book.add_version()
         self.books.append(book)
 
     def __str__(self):

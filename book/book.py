@@ -17,6 +17,7 @@ class Book:
         # attribut used for png creation
         self.version = 'V1'
         self.title_modify = self.title[:40]
+        self.image_file = ''
 
     def __str__(self):
         return '[' + self.category + '] ' + self.title
