@@ -22,7 +22,7 @@ def test_category():
 
 def test_book():
     session = requests.Session()
-    url = 'http://books.toscrape.com/catalogue/the-bridge-to-consciousness-im-writing-the-bridge-between-science-and-our-old-and-new-beliefs_840/index.html'
+    url = 'http://books.toscrape.com/catalogue/the-third-wave-an-entrepreneurs-vision-of-the-future_862/index.html'
     book_loader = BookLoader(url, session)
     a_book = book_loader.load()
     a_book.add_version()
@@ -35,7 +35,6 @@ def test_book():
     print(a_book)
 
     # book_exporter.export_img('img')
-
 
 
 def main():

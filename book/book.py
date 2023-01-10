@@ -16,8 +16,9 @@ class Book:
 
         # attribute used for png creation
         self.version = 'V1'
+        # only the 40 first caracters without punctuation and quote
         self.title_modify = self.title[:40].translate(
-            str.maketrans('', '', string.punctuation))
+            str.maketrans('', '', string.punctuation)).replace("’", ' ')
         self.image_file = ''
 
     def __str__(self):
@@ -26,6 +27,7 @@ class Book:
     def __repr__(self):
         return '\n'.join([
             f'title: {self.title} - {self.version}',
+            f'Modify title: {self.title_modify}',
             f'category: {self.category}',
             f'page: {self.page_url}',
             f'description: '
