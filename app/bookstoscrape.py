@@ -92,8 +92,9 @@ class BooksToScrape:
         progress_bar = tqdm(total=len(self.categories), desc='Load images')
         for cat in self.categories:
             cat_exporter = CategoryExporter(cat)
-            cat_exporter.export_pictures(self.img_directory)
+            cat_exporter.export_pictures(self.img_directory, self.session)
             progress_bar.update(1)
+        progress_bar.close()
 
     def scrapping(self):
 
@@ -109,6 +110,7 @@ class BooksToScrape:
             self.categories.append(cat)
             self.books_count += len(cat.books)
             progress_bar.update(len(cat.books))
+        progress_bar.close()
 
         execution_time = str(datetime.now() - start_time).split('.', 2)[0]
         LOGGER.info(f"--- {execution_time}  ---")

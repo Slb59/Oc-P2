@@ -1,5 +1,5 @@
 import textwrap
-
+import string
 
 class Book:
     def __init__(self, category, title):
@@ -14,9 +14,10 @@ class Book:
         self.review_rating = 0
         self.image_url = ''
 
-        # attribut used for png creation
+        # attribute used for png creation
         self.version = 'V1'
-        self.title_modify = self.title[:40]
+        self.title_modify = self.title[:40].translate(
+            str.maketrans('', '', string.punctuation))
         self.image_file = ''
 
     def __str__(self):

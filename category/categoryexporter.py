@@ -34,7 +34,7 @@ class CategoryExporter:
                 book_to_csv = BookExporter(a_book)
                 book_to_csv.to_csv(f)
 
-    def export_pictures(self, directory):
+    def export_pictures(self, directory, session):
         """ export all the pictures of the category """
         # create the folder for the category
         category_path = directory + '/' + self.category.category_name.replace(' ', '_')
@@ -49,10 +49,9 @@ class CategoryExporter:
                         + '_' + book.version \
                         + '.png'
 
-            book.image_file = file_name.translate(str.maketrans('', '', string.punctuation))
-            print(book.image_file)
+            book.image_file = file_name
             book_exporter = BookExporter(book)
-            book_exporter.export_pictures()
+            book_exporter.export_pictures(session)
 
         # export new csv
         self.to_csv(category_path + '/' + self.category.category_name + '.csv')
