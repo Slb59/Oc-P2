@@ -49,7 +49,7 @@ python scrape.py
 
 Il est possible de préciser les répertoires de destination
 ```shell
-python scrape.py --csv-dir mon_rep_csv --img-dir mon_rep_csv
+python scrape.py --csv-dir mon_rep_csv --img-dir mon_rep_img
 ```
 ---
 
