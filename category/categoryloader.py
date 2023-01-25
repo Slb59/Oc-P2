@@ -46,7 +46,7 @@ class CategoryLoader:
 
     def load_all_books(self, page, cat):
         """ call the book loader for each book of the page """
-        self.html = self.session.get(self.page_url + self.page_url_index, timeout=5).content
+        self.html = self.session.get(self.page_url + self.page_url_index, timeout=20).content
         LOGGER.debug('Category load page ' + str(page) + ': ' + self.page_url + self.page_url_index)
         self.root = BeautifulSoup(self.html, 'html.parser')
 

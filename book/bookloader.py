@@ -13,7 +13,7 @@ class BookLoader:
         self.site_url = 'http://books.toscrape.com/'
         self.page_url = url
         self.session = session
-        self.html = self.session.get(self.page_url, timeout=5).content
+        self.html = self.session.get(self.page_url, timeout=20).content
 
     def load(self):
 

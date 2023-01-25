@@ -38,7 +38,7 @@ class BookExporter:
     def export_pictures(self, session):
 
         LOGGER.debug(' Load image: ' + self.book.image_url)
-        r = session.get(self.book.image_url, timeout=5).content
+        r = session.get(self.book.image_url, timeout=20).content
 
         # save the file
         with open(self.book.image_file, "wb+") as f:
